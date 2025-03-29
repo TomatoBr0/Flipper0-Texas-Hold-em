@@ -1,12 +1,11 @@
 #include <stdio.h>
-#include <unistd.h>   // for sleep()
 #include "game.h"
 #include "ui.h"
 #include "ai.h"
 #include "winrate.h"
 
 int main(void) {
-    // Initialization of systems
+    // Initialize all subsystems
     ui_init();
     game_init();
     ai_init();
@@ -14,30 +13,39 @@ int main(void) {
 
     printf("Starting Texas Hold'em Game...\n");
 
-    // Main game loop simulation
-    // For demonstration, we'll run 10 iterations
-    for (int frame = 0; frame < 10; frame++) {
-        printf("----- Frame %d -----\n", frame);
+    // Main game loop (for demonstration, run a fixed number of rounds)
+    for (int round = 0; round < 5; round++) {
+        printf("----- Round %d -----\n", round + 1);
 
-        // Update game logic (dealing cards, bets, etc.)
-        game_update();
+        // Start a new game round (deal cards, etc.)
+        game_deal_cards();
 
-        // Clear the display and redraw UI elements
+        // Clear the screen and draw background and game elements
         ui_clear();
         ui_draw_background();
         ui_draw_game();
+        ui_draw_community_cards();
         ui_update();
 
-        // Process AI decision-making
+        // Process AI decisions
         ai_process();
 
-        // Update win rate statistics (if applicable)
-        winrate_update();
+        // Simulate end-of-round evaluation and update win rate stats
+        int winner = determine_winner();
+        if (winner == 0) {
+            printf("Player wins round %d!\n", round + 1);
+        } else {
+            printf("AI wins round %d!\n", round + 1);
+        }
+        winrate_update(winner);
 
-        // Sleep for a second to simulate a frame delay (adjust as needed)
-        sleep(1);
+        // Wait between rounds (simulate frame delay)
+        // Replace sleep() with the appropriate delay function on the Flipper Zero.
+        #ifdef DESKTOP_TEST
+        sleep(2);
+        #endif
     }
 
-    printf("Exiting game loop.\n");
+    printf("Game over!\n");
     return 0;
 }

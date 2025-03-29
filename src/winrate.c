@@ -1,14 +1,22 @@
 #include <stdio.h>
 #include "winrate.h"
 
-// Initialize win rate tracking (e.g., load saved stats)
+static int games_played = 0;
+static int player_wins = 0;
+
 void winrate_init(void) {
-    // Set initial win rate stats
+    games_played = 0;
+    player_wins = 0;
     printf("Win rate tracking initialized.\n");
 }
 
-// Update win rate after each game or turn
-void winrate_update(void) {
-    // Calculate and update win rate statistics
-    printf("Win rate updated.\n");
+void winrate_update(int winner) {
+    // Increment games played. If winner is 0, player won.
+    games_played++;
+    if (winner == 0) {
+        player_wins++;
+    }
+    float win_rate = (games_played > 0) ? ((float)player_wins / games_played) * 100 : 0;
+    printf("Games Played: %d, Player Wins: %d, Win Rate: %.2f%%\n",
+           games_played, player_wins, win_rate);
 }

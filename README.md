@@ -1,17 +1,17 @@
 # Flipper Zero Texas Hold'em
 
-This is a Texas Hold'em game for the Flipper Zero with multiplayer and AI capabilities. The project is structured as follows:
+This project implements a basic Texas Hold'em game for the Flipper Zero. It includes:
+- **Game Logic:** Dealing cards, evaluating a simple win condition.
+- **User Interface (UI):** Drawing cards, background, and community cards.
+- **AI:** Basic AI decision-making.
+- **Win Rate Tracking:** Simple tracking of player win rate.
 
-- **src/**: Contains the source code (game logic, UI, AI, win rate tracking).
-- **include/**: Header files for function declarations.
-- **assets/**: Contains images and other assets used by the game.
-- **Makefile**: Build system for compiling the project.
-- **README.md**: Project documentation.
+## File Structure
+flipper-zero-texas-holdem/ ├── src/ │ ├── main.c │ ├── game.c │ ├── ui.c │ ├── ai.c │ └── winrate.c ├── include/ │ ├── game.h │ ├── ui.h │ ├── ai.h │ └── winrate.h ├── assets/ │ ├── background.png │ └── card_images/ ├── Makefile └── README.md
 
-## Setup and Build
+## Build and Test
 
-1. Clone the repository.
-2. Install the Flipper Zero SDK and required dependencies.
-3. Build the project:
+1. Open the project in VS Code.
+2. Build the project by running:
    ```bash
    make
